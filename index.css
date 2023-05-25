@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+
+body{
+    background: url(./assets/backgame.png) no-repeat top center/cover;
+}
+.game-board{
+ width: 80%;
+ height: 500px;
+ border: 1px solid black;
+ margin: 0 auto;
+ position: relative;
+}
+
+.canibal{
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    animation:  canibal-animation 2s infinite;
+}
+
+@keyframes canibal-animation {
+    from {
+        right: -80px;
+    }
+    to {
+        right: 100%;
+    }
+}
