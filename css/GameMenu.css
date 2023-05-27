@@ -5,9 +5,21 @@
 }
 
 body{
-    background: url(../assets/Background.png) no-repeat  ;
     min-height: 100vh;
+    background-image: url(../assets/Background.png);
+    background-position: left center;
+    background-repeat: repeat-x;
+    animation: parallaxEffect 20s linear infinite;
 }
+/*------------------PARALLAX----------------------------------------------*/
+@keyframes parallaxEffect {
+    0% {
+      background-position: 0 0; /* Posição inicial do plano de fundo */
+    }
+    100% {
+      background-position: 100% 0; /* Posição final do plano de fundo (completa a largura da div) */
+    }
+  }
 /* --------------GAME NAME---------------------------------------------------*/
 
 .game-name-{
@@ -104,7 +116,8 @@ input{
 
 .rodape{
     backdrop-filter: blur(5px);
-    position: absolute;
+    width: 300px;
+    position: fixed;
     bottom: 0;
     left: 0;
     padding: 10px;
