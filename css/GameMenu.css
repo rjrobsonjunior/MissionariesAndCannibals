@@ -23,22 +23,24 @@ body{
 /* --------------GAME NAME---------------------------------------------------*/
 
 .game-name-{
-    width: 650px;
+    width: 750px;
     margin: auto;
     padding: 10px;
     font-size: 38px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
+
 }
 .biblia{
     width: 80px;
+    height: auto;
     margin-right: auto;
 }
 
 .M{
-    color: rgb(252, 0, 0);
-    -webkit-text-stroke: 2px rgb(70, 0, 0);
+    flex-direction: row;
+    color: rgb(138, 0, 0);
+    -webkit-text-stroke: 2px rgb(248, 124, 124);
     text-align: left;
 }
 .e{
@@ -55,7 +57,17 @@ body{
     width: 80px;
     margin-left: auto;
 }
-
+.canibais{
+    display: flex;
+    margin-left: auto;
+}
+.centered-div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Defina a largura, altura e estilos adicionais conforme necessário */
+}
 /* --------------FORM NUMBER MISSIONARIES AND CANNIBALS---------------------------------------------------*/
 .form {
     color:white;
