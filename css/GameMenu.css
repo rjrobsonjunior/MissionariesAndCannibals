@@ -1,32 +1,59 @@
 *{
+    font-family: 'Press Start 2P', cursive;
     margin: 0;
     padding: 0;
-    box-sizing:border-box;
 }
 
 body{
-    background: url(./assets/backgame.png) no-repeat top center/cover;
-}
-.game-board{
- width: 80%;
- height: 500px;
- border: 1px solid black;
- margin: 0 auto;
- position: relative;
+    background: url(../assets/Background.png) no-repeat  ;
+    min-height: 100vh;
 }
 
-.canibal{
+.game-name-{
+    width: 650px;
+    margin: auto;
+    padding: 10px;
+    font-size: 38px;
+    display: flex;
+    flex-direction: column;
+}
+.biblia{
+    width: 80px;
+    margin-right: auto;
+}
+
+.M{
+    color: rgb(252, 0, 0);
+    -webkit-text-stroke: 2px rgb(255, 255, 255);
+    text-align: left;
+}
+.e{
+    color:white;
+    -webkit-text-stroke: 2px rgb(0, 0, 0);
+    text-align: center;
+}
+.C{
+    color: blue;
+    -webkit-text-stroke: 2px rgb(255, 255, 255);
+    text-align: right;
+}
+.faca{
+    width: 80px;
+    margin-left: auto;
+}
+
+.controls{
+    align-items: center;
+}
+
+.rodape{
+    backdrop-filter: blur(5px);
     position: absolute;
     bottom: 0;
-    width: 80px;
-    animation:  canibal-animation 2s infinite;
-}
-
-@keyframes canibal-animation {
-    from {
-        right: -80px;
-    }
-    to {
-        right: 100%;
-    }
+    left: 0;
+    padding: 10px;
+    color: yellow;
+    font-size: 16px;
+    display:flex;
+    flex-direction: column;
 }
