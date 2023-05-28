@@ -61,6 +61,25 @@ body{
     margin: auto;
 }
 
+.form{
+    width: 400px;
+    color:black;
+    font-size: 18px;
+    padding: 5px 0px;
+    background:white;
+    border-radius: 5px;
+    text-align: center;
+    gap: 10px
+}
+
+.controls p {
+    font-size: 18px;
+}
+  
+.controls span {
+    font-weight: bold;
+    color: rgb(69, 92, 6);
+}
 
 .button {
     width: 100%;
