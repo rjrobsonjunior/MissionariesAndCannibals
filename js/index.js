@@ -1,4 +1,4 @@
-//
+// object GameState
 const GameState = {
   MENU: "menu",
   PLAYING: "playing",
@@ -18,42 +18,39 @@ let endTime;
 function updateGameState() {
   switch (gameState) {
     case GameState.MENU:
-      // Lógica para o estado do menu
-      // Exibir o menu e aguardar entrada do usuário
+      // TODO
       break;
     case GameState.PLAYING:
-      // Lógica para o estado de jogo em execução
-      // Atualizar a lógica do jogo, movimentos dos personagens, verificação de vitória/derrota, etc.
+      //TODO
       break;
     case GameState.GAME_OVER:
-      // Lógica para o estado de jogo encerrado
-      // Exibir tela de game over, pontuações finais, etc.
+      //TODO
       break;
     case GameState.GAME_WIN:
-      //
+      //TODO
       break;
     default:
       break;
   }
 }
 
-// Função para iniciar o jogo
+// function to start the game
 function startGame() {
   if (gameState !== GameState.MENU) return;
   startTime = new Date();
   timerInterval = setInterval(updateTimer, 1000);
-  // Obter as quantidades de missionários e canibais inseridas pelo usuário
+  // get the amounts of missonaries and cannibals entered by user
   missionaries_cannibals_count = parseInt(document.getElementById("number").value);
    
-  // Mudar o estado do jogo para PLAYING
+  // change game state to PLAYING
   gameState = GameState.PLAYING;
   showEndScreen();
   // Resto da lógica para iniciar o jogo
 }
 
-// Função para encerrar o jogo
+// Function to end the game
 function endGame() {
-  // Mudar o estado do jogo para GAME_OVER
+  // change game state to GAME_OVER
   gameState = GameState.GAME_OVER;
   
   // Resto da lógica para encerrar o jogo
@@ -68,20 +65,6 @@ function gameLoop() {
   
   // Agendar a próxima chamada do loop do jogo
   requestAnimationFrame(gameLoop);
-}
-
-
-// Function to start the game
-function startGame() {
-  if (gameRunning) return;
-  gameRunning = true;
-  // Get the selected quantities of missionaries and cannibals from the inputs
-  missionariesCount = parseInt(document.getElementById("missionaries").value);
-  cannibalsCount = parseInt(document.getElementById("cannibals").value);
-  // Clear the game board
-  document.getElementById("game-board").innerHTML = "";
-  // Create and append the game board elements (e.g., divs representing the islands and characters)
-  // Add event listeners for game controls (e.g., pause, restart)
 }
 
 // Function to pause the game
