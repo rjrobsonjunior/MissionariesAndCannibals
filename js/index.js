@@ -1,7 +1,75 @@
-// Game variables
-let missionariesCount = 0;
-let cannibalsCount = 0;
-let gameRunning = false;
+//
+const GameState = {
+  MENU: "menu",
+  PLAYING: "playing",
+  GAME_OVER: "game_over",
+  GAME_WIN: "game_win",
+};
+
+
+// variables to control the state, time and creation of the game
+let gameState = GameState.MENU;
+let missionaries_cannibals_count = 0;
+let movesCount = 0;
+let startTime;
+let endTime;
+
+// Função para atualizar o estado do jogo
+function updateGameState() {
+  switch (gameState) {
+    case GameState.MENU:
+      // Lógica para o estado do menu
+      // Exibir o menu e aguardar entrada do usuário
+      break;
+    case GameState.PLAYING:
+      // Lógica para o estado de jogo em execução
+      // Atualizar a lógica do jogo, movimentos dos personagens, verificação de vitória/derrota, etc.
+      break;
+    case GameState.GAME_OVER:
+      // Lógica para o estado de jogo encerrado
+      // Exibir tela de game over, pontuações finais, etc.
+      break;
+    case GameState.GAME_WIN:
+      //
+      break;
+    default:
+      break;
+  }
+}
+
+// Função para iniciar o jogo
+function startGame() {
+  if (gameState !== GameState.MENU) return;
+  startTime = new Date();
+  timerInterval = setInterval(updateTimer, 1000);
+  // Obter as quantidades de missionários e canibais inseridas pelo usuário
+  missionaries_cannibals_count = parseInt(document.getElementById("number").value);
+   
+  // Mudar o estado do jogo para PLAYING
+  gameState = GameState.PLAYING;
+  showEndScreen();
+  // Resto da lógica para iniciar o jogo
+}
+
+// Função para encerrar o jogo
+function endGame() {
+  // Mudar o estado do jogo para GAME_OVER
+  gameState = GameState.GAME_OVER;
+  
+  // Resto da lógica para encerrar o jogo
+}
+
+// Função de loop do jogo (chamada em intervalos regulares)
+function gameLoop() {
+  // Atualizar o estado do jogo
+  updateGameState();
+  
+  // Resto da lógica do loop do jogo
+  
+  // Agendar a próxima chamada do loop do jogo
+  requestAnimationFrame(gameLoop);
+}
+
 
 // Function to start the game
 function startGame() {
