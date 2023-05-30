@@ -9,7 +9,7 @@ const GameState = {
 
 // variables to control the state, time and creation of the game
 let gameState = GameState.MENU;
-let missionaries_cannibals_count = 0;
+const missionaries_cannibals_count = getParameterBynumber('number');
 let movesCount = 0;
 let startTime;
 let endTime;
@@ -79,14 +79,89 @@ function pauseGame() {
 function restartGame() {
   // Reset game variables
   gameRunning = false;
-  missionariesCount = 0;
-  cannibalsCount = 0;
+  missionaries_cannibals_count = 0;
   // Reset the game board
   document.getElementById("game-board").innerHTML = "";
   // Implement any other necessary reset logic
 }
 
 // Event listeners for control buttons
-document.getElementById("start-button").addEventListener("click", startGame);
-document.getElementById("pause-button").addEventListener("click", pauseGame);
-document.getElementById("restart-button").addEventListener("click", restartGame);
+//document.getElementById("start-button").addEventListener("click", startGame);
+//document.getElementById("pause-button").addEventListener("click", pauseGame);
+//document.getElementById("restart-button").addEventListener("click", restartGame);
+
+// Evento para iniciar o jogo
+const startButton = document.querySelector('#start-button');
+startButton.addEventListener('click', function() {
+  // Redirecionar para a próxima página
+  window.location.href = 'GameLoop.html' + encodeURIComponent(number);
+  console.log(number)
+});
+
+// Código para pagina2.html
+
+// Evento para enviar o nome
+const submitButton = document.querySelector('#submit-button');
+submitButton.addEventListener('click', function() {
+  // Obter o valor do input
+  const numberInput = document.querySelector('#number-input');
+  const number = numberInput.value;
+
+  // Redirecionar para a próxima página, passando o nome como parâmetro na URL
+  window.location.href = 'pagina3.html?number=';
+});
+
+function getParameterBynumber(number) {
+  const url = window.location.href;
+  number = number.replace(/[\[\]]/g, '\\$&');
+  const regex = new RegExp('[?&]' + number + '(=([^&#]*)|&|#|$)');
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+
+const numberParam = getParameterBynumber('number');
+
+const missionariosCanvas = document.getElementById('missionarios-canvas');
+const canibaisCanvas = document.getElementById('canibais-canvas');
+const boatCanvas = document.getElementById('boat-canvas');
+
+const missionariosContext = missionariosCanvas.getContext('2d');
+const canibaisContext = canibaisCanvas.getContext('2d');
+const boatContext = boatCanvas.getContext('2d');
+
+// Configurar o posicionamento e estilo dos canvases
+missionariosCanvas.style.float = 'right';
+canibaisCanvas.style.float = 'right';
+boatCanvas.style.margin = '0 auto';
+
+// Função para desenhar os missionários no canvas
+function drawMissionarios(count) {
+  missionariosContext.clearRect(0, 0, missionariosCanvas.width, missionariosCanvas.height);
+  missionariosContext.fillStyle = 'blue';
+  missionariosContext.fillRect(0, 0, count * 20, missionariosCanvas.height);
+}
+
+// Função para desenhar os canibais no canvas
+function drawCanibais(count) {
+  canibaisContext.clearRect(0, 0, canibaisCanvas.width, canibaisCanvas.height);
+  canibaisContext.fillStyle = 'red';
+  canibaisContext.fillRect(0, 0, count * 20, canibaisCanvas.height);
+}
+
+// Função para desenhar o barco no canvas
+function drawBoat() {
+  boatContext.clearRect(0, 0, boatCanvas.width, boatCanvas.height);
+  boatContext.fillStyle = 'brown';
+  boatContext.fillRect(0, 0, boatCanvas.width, boatCanvas.height);
+}
+
+// Exemplo de uso:
+const missionariosCount = 3;
+const canibaisCount = 2;
+
+drawMissionarios(missionariosCount);
+drawCanibais(canibaisCount);
+drawBoat();
