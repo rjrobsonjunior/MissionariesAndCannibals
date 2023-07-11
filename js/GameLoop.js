@@ -1,3 +1,16 @@
+// path to images
+const URLboatDeselected = '../assets/barco.png';
+const URLboatSelected = '../assets/barco2.png';
+const URLmissionariesSelected = '../assets/padre1.png';
+const URLmissionariesDeselected = '../assets/padre1.png';
+const URLcannibalsSelected = '../assets/canibal1.png';
+const URLcannibalsDeselected = '../assets/canibal2.png';
+
+//canvas parameters
+const canvasWidth = 50;
+const canvasHeight = 70;
+const canvasSpacing = 10;
+
 function getParameterBynumber(number) {
   const url = window.location.href;
   number = number.replace(/[\[\]]/g, '\\$&');
@@ -63,22 +76,27 @@ function pauseGame() {
 }
 
 
-const missionariosCanvas = numberParam;
-const canibaisCanvas = numberParam;
-const boatCanvas = 1;
-
-function criarCanvas(nome, x, y, largura, altura, imagem) {
+function criarCanvas(nome, x, y, width, height, imagemURL) {
   const canvas = document.createElement('canvas');
   canvas.id = nome;
-  canvas.width = largura;
-  canvas.height = altura;
+  canvas.width = width ;
+  canvas.height = height ;
   canvas.style.position = 'absolute';
   canvas.style.left = x + 'px';
   canvas.style.top = y + 'px';
-  canvas.style.background = imagem;
+
+  const ctx = canvas.getContext('2d');
+
+  const imagem = new Image();
+  imagem.src = imagemURL;
+
+  imagem.onload = function() {
+    ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
+  };
 
   document.body.appendChild(canvas);
 }
+
 
 function moverCanvas(event) {
   const canvas = event.target;
@@ -89,16 +107,16 @@ function moverCanvas(event) {
 }
 
 
-const barcoCanvas = document.getElementById('barco-canvas');
+const barcoCanvas = document.getElementById('boat-canvas');
 barcoCanvas.addEventListener('click', moverCanvas);
 
-criarCanvas('barco-canvas', 10, 10, canvasWidth, canvasHeight, 'blue');
+criarCanvas('barco-canvas', 10, 10, 150, canvasHeight, URLboatDeselected );
 
 let x = 10 + canvasWidth + canvasSpacing;
 let y = 10;
-const corMissionario = 'green';
-for (let i = 0; i < quantidade; i++) {
-  const missionarioCanvas = criarCanvas('missionario-canvas-' + i, x, y, canvasWidth, canvasHeight, corMissionario);
+
+for (let i = 0; i < numberParam; i++) {
+  const missionarioCanvas = criarCanvas('missionario-canvas-' + i, x, y, canvasWidth, canvasHeight, URLmissionariesDeselected);
   missionarioCanvas.addEventListener('click', moverCanvas);
 
   x += canvasWidth + canvasSpacing;
@@ -106,9 +124,9 @@ for (let i = 0; i < quantidade; i++) {
 
 x = 10 + canvasWidth + canvasSpacing;
 y += canvasHeight + canvasSpacing;
-const corCanibal = 'red';
+
 for (let i = 0; i < quantidade; i++) {
-  const canibalCanvas = criarCanvas('canibal-canvas-' + i, x, y, canvasWidth, canvasHeight, corCanibal);
+  const canibalCanvas = criarCanvas('canibal-canvas-' + i, x, y, canvasWidth, canvasHeight, URLcannibalsDeselected);
   canibalCanvas.addEventListener('click', moverCanvas);
 
   x += canvasWidth + canvasSpacing;
