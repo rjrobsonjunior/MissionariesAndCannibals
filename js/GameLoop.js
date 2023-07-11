@@ -1,24 +1,60 @@
-startTime = new Date();
-timerInterval = setInterval(updateTimer, 1000);
-
 function getParameterBynumber(number) {
-    const url = window.location.href;
-    number = number.replace(/[\[\]]/g, '\\$&');
-    const regex = new RegExp('[?&]' + number + '(=([^&#]*)|&|#|$)');
-    const results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-  }
+  const url = window.location.href;
+  number = number.replace(/[\[\]]/g, '\\$&');
+  const regex = new RegExp('[?&]' + number + '(=([^&#]*)|&|#|$)');
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
   
 // Obter o valor do parâmetro 'number' da URL
 const numberParam = getParameterBynumber('number');
+console.log(numberParam);
 
-// Exibir o valor do parâmetro na página
-const numberDisplay = document.querySelector('#number-display');
-numberDisplay.textContent = 'Olá, ' + numberParam + '!';
+// Variáveis para contagem de movimentos e tempo
+let movesCount = 0;
+let startTime;
+let endTime;  
 
-// Function to pause the game
+// Função para exibir a tela de fim de jogo
+function showEndScreen() {
+  // Parar o cronômetro (se estiver em execução)
+  endTime = new Date();
+  clearInterval(timerInterval);
+
+  // Atualizar as informações de movimentos e tempo
+  const movesSpan = document.querySelector('#moves-count span');
+  movesSpan.textContent = movesCount;
+
+  const timeSpan = document.querySelector('#time-spent span');
+  const timeDiff = Math.floor((endTime - startTime) / 1000); // Duração em segundos
+  const minutes = Math.floor(timeDiff / 60);
+  const seconds = timeDiff % 60;
+  timeSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+  // Exibir a tela de fim de jogo
+  const endScreen = document.querySelector('#end-screen');
+  endScreen.style.display = 'flex';
+}
+
+// Função para iniciar o jogo
+function startGame() {
+  // Iniciar o cronômetro
+  startTime = new Date();
+  timerInterval = setInterval(updateTimer, 1000);
+
+  // Lógica do jogo...
+
+  // Ao finalizar o jogo, chame a função showEndScreen()
+  showEndScreen();
+}
+
+// Função para atualizar o cronômetro (opcional)
+function updateTimer() {
+  // Lógica para atualizar o cronômetro exibido na tela
+}
+
 function pauseGame() {
     if (!gameRunning) return;
     // Pause the game logic
@@ -31,36 +67,49 @@ const missionariosCanvas = numberParam;
 const canibaisCanvas = numberParam;
 const boatCanvas = 1;
 
-const missionariosContext = missionariosCanvas.getContext('2d');
-const canibaisContext = canibaisCanvas.getContext('2d');
-const boatContext = boatCanvas.getContext('2d');
+function criarCanvas(nome, x, y, largura, altura, imagem) {
+  const canvas = document.createElement('canvas');
+  canvas.id = nome;
+  canvas.width = largura;
+  canvas.height = altura;
+  canvas.style.position = 'absolute';
+  canvas.style.left = x + 'px';
+  canvas.style.top = y + 'px';
+  canvas.style.background = imagem;
 
-// Configurar o posicionumbernto e estilo dos canvases
-missionariosCanvas.style.float = 'right';
-canibaisCanvas.style.float = 'right';
-boatCanvas.style.margin = '0 auto';
-
-// Função para desenhar os missionários no canvas
-function drawMissionarios(count) {
-  missionariosContext.clearRect(0, 0, missionariosCanvas.width, missionariosCanvas.height);
-  missionariosContext.fillStyle = 'blue';
-  missionariosContext.fillRect(0, 0, count * 20, missionariosCanvas.height);
+  document.body.appendChild(canvas);
 }
 
-// Função para desenhar os canibais no canvas
-function drawCanibais(count) {
-  canibaisContext.clearRect(0, 0, canibaisCanvas.width, canibaisCanvas.height);
-  canibaisContext.fillStyle = 'red';
-  canibaisContext.fillRect(0, 0, count * 20, canibaisCanvas.height);
+function moverCanvas(event) {
+  const canvas = event.target;
+  const offsetX = event.clientX - canvas.offsetLeft;
+  const offsetY = event.clientY - canvas.offsetTop;
+  canvas.style.left = (event.clientX - offsetX) + 'px';
+  canvas.style.top = (event.clientY - offsetY) + 'px';
 }
 
-// Função para desenhar o barco no canvas
-function drawBoat() {
-  boatContext.clearRect(0, 0, boatCanvas.width, boatCanvas.height);
-  boatContext.fillStyle = 'brown';
-  boatContext.fillRect(0, 0, boatCanvas.width, boatCanvas.height);
+
+const barcoCanvas = document.getElementById('barco-canvas');
+barcoCanvas.addEventListener('click', moverCanvas);
+
+criarCanvas('barco-canvas', 10, 10, canvasWidth, canvasHeight, 'blue');
+
+let x = 10 + canvasWidth + canvasSpacing;
+let y = 10;
+const corMissionario = 'green';
+for (let i = 0; i < quantidade; i++) {
+  const missionarioCanvas = criarCanvas('missionario-canvas-' + i, x, y, canvasWidth, canvasHeight, corMissionario);
+  missionarioCanvas.addEventListener('click', moverCanvas);
+
+  x += canvasWidth + canvasSpacing;
 }
 
-drawMissionarios(missionariosCanvas);
-drawCanibais(canibaisCanvas);
-drawBoat();
+x = 10 + canvasWidth + canvasSpacing;
+y += canvasHeight + canvasSpacing;
+const corCanibal = 'red';
+for (let i = 0; i < quantidade; i++) {
+  const canibalCanvas = criarCanvas('canibal-canvas-' + i, x, y, canvasWidth, canvasHeight, corCanibal);
+  canibalCanvas.addEventListener('click', moverCanvas);
+
+  x += canvasWidth + canvasSpacing;
+}

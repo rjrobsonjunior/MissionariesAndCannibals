@@ -12,13 +12,18 @@ body{
     background-size: cover;
 }
 
-#game-container {
-    display: flex;
-  }
-  #missionarios-canvas,
-  #canibais-canvas {
-    margin-right: 10px;
-  }
-  #boat-canvas {
-    margin: 0 auto;
-  }
+game-loop{
+  min-height: 100vh;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+canvas{
+  min-height: 100vh;
+}
+
+a {
+  color: white;
+  font-size: 24px;
+}

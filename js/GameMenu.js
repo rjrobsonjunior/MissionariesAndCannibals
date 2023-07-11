@@ -2,7 +2,7 @@
 const startButton = document.querySelector('#start-button');
 startButton.addEventListener('click', function() {
   // Obter o valor do input
-  const numberInput = document.querySelector('#number');
+  const numberInput = document.querySelector('#number-input');
   const number = numberInput.value;
 
   // Redirecionar para a próxima página, passando o nome como parâmetro na URL
