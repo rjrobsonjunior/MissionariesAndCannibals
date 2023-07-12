@@ -99,11 +99,13 @@ function createCanvas(name, x, y, width, height, imagemURL) {
 
 
 function moveCanvas(event) {
+  console.log("move 1");
   const canvas = event.target;
   const offsetX = event.clientX - canvas.offsetLeft;
   const offsetY = event.clientY - canvas.offsetTop;
   canvas.style.left = (event.clientX - offsetX) + 'px';
   canvas.style.top = (event.clientY - offsetY) + 'px';
+  console.log("move 2");
 }
 
 //------------------ canvas creating -----------------------------------//
@@ -114,31 +116,27 @@ barcoCanvas.addEventListener('click', function(event) {
 
 createCanvas('barco-canvas', 600, 500, 400, canvasHeight, URLboatDeselected );
 
-let x = 10 + canvasWidth + canvasSpacing;
+let x = 10;
 let y = 500;
 
 for (let i = 0; i < numberParam; i++) {
   console.log(" missionario iterou:"+ i);
   const missionarioCanvas = createCanvas('missionario-canvas-' + i, x, y, canvasWidth, canvasHeight, URLmissionariesDeselected);
-  console.log("add event");
-  missionarioCanvas.addEventListener('click', function(event) {
+  /*missionarioCanvas.addEventListener('click', function(event) {
     moveCanvas(event);
-  });
-  console.log("incrementing x");
+  });*/
   x += canvasWidth + canvasSpacing;
-  console.log(" missionario iterou:"+ i);
 }
 
-x = 10 + canvasWidth + canvasSpacing;
+x = 10;
 y -= canvasHeight + canvasSpacing;
 
-for (let i = 0; i < quantidade; i++) {
-  const canibalCanvas = createCanvas('canibal-canvas-' + i, x, y, canvasWidth, canvasHeight, URLcannibalsDeselected);
-  canibalCanvas.addEventListener('click', function(event) {
-    moveCanvas(event);
-  });
-
-  x += canvasWidth + canvasSpacing;
+for (let i = 0; i < numberParam; i++) {
   console.log("canibal iterou:"+ i);
+  const canibalCanvas = createCanvas('canibal-canvas-' + i, x, y, canvasWidth, canvasHeight, URLcannibalsDeselected);
+  /* canibalCanvas.addEventListener('click', function(event) {
+    moveCanvas(event);
+  });*/
+  x += canvasWidth + canvasSpacing;
 
 }

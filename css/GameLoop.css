@@ -24,7 +24,13 @@ canvas{
   background-size: cover;
 }
 
-a {
+h1{
   color: white;
-  font-size: 24px;
+  position: flex;
+  font-size: 34px
+}
+#container {
+  width: 200px;
+  height: 80px;
+  border: 2px white solid
 }
