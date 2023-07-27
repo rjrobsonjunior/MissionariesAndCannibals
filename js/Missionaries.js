@@ -1,3 +1,6 @@
+const URLmissionariesSelected = '../assets/padre1.png';
+const URLmissionariesDeselected = '../assets/padre1.png';
+
 export class Missionaries {
     constructor(posX, posY, state) {
       this.posX = posX;
