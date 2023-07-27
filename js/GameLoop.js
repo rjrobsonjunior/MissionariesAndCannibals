@@ -30,7 +30,7 @@ let movesCount = 0;
 let startTime;
 let endTime;  
 
-// Função para exibir a tela de fim de jogo
+// Função para exibir a tela de fim de jogo 
 function showEndScreen() {
   // Parar o cronômetro (se estiver em execução)
   endTime = new Date();
