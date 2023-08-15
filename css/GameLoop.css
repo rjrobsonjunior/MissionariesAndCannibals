@@ -1,36 +1,48 @@
-*{
-    font-family: 'Press Start 2P', cursive;
-    margin: 0;
-    padding: 0;
+* {
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    min-height: 100vh;
-    background-image: url(../assets/backgame.png);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+body {
+  min-height: 100vh;
+  background-image: url(../assets/backgame.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-game-loop{
+game-loop {
   min-height: 100vh;
   display: flex;
   margin: 0;
   padding: 0;
 }
 
-canvas{
+canvas {
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-h1{
+h1 {
   color: white;
   position: flex;
   font-size: 34px
 }
+
 #container {
   width: 200px;
   height: 80px;
   border: 2px white solid
+}
+
+#timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 5px;
 }

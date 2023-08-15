@@ -20,7 +20,7 @@ function getParameterBynumber(number) {
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-  
+
 // Obter o valor do parâmetro 'number' da URL
 const numberParam = getParameterBynumber('number');
 console.log(numberParam);
@@ -28,7 +28,7 @@ console.log(numberParam);
 // Variáveis para contagem de movimentos e tempo
 let movesCount = 0;
 let startTime;
-let endTime;  
+let endTime;
 
 // Função para exibir a tela de fim de jogo
 function showEndScreen() {
@@ -63,24 +63,41 @@ function startGame() {
   showEndScreen();
 }
 
-// Função para atualizar o cronômetro (opcional)
+// Função para atualizar o cronômetro exibido na tela
 function updateTimer() {
-  // Lógica para atualizar o cronômetro exibido na tela
+  // Obter o elemento HTML onde o cronômetro será exibido
+  const timerElement = document.querySelector('#timer');
+
+  // Lógica para atualizar o cronômetro (você precisa implementar esta parte)
+  // Aqui está um exemplo simples de atualização, apenas para fins de ilustração:
+  const currentTime = new Date();
+  timerElement.textContent = currentTime.toLocaleTimeString();
 }
 
-function pauseGame() {
-    if (!gameRunning) return;
-    // Pause the game logic
-    gameRunning = false;
-    // Implement pause functionality (e.g., freeze character movement)
+function updateTimer() {
+  const timerElement = document.querySelector('#timer');
+  const currentTime = new Date();
+  timerElement.textContent = currentTime.toLocaleTimeString();
 }
 
+function startTimer() {
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+window.addEventListener('load', function () {
+  startTimer();
+});
+
+window.addEventListener('beforeunload', function () {
+  stopTimer();
+});
 
 function createCanvas(name, x, y, width, height, imagemURL) {
   const canvas = document.createElement('canvas');
   canvas.id = name;
-  canvas.width = width ;
-  canvas.height = height ;
+  canvas.width = width;
+  canvas.height = height;
   canvas.style.position = 'absolute';
   canvas.style.left = x + 'px';
   canvas.style.top = y + 'px';
@@ -90,7 +107,7 @@ function createCanvas(name, x, y, width, height, imagemURL) {
   const imagem = new Image();
   imagem.src = imagemURL;
 
-  imagem.onload = function() {
+  imagem.onload = function () {
     ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
   };
 
@@ -110,17 +127,17 @@ function moveCanvas(event) {
 
 //------------------ canvas creating -----------------------------------//
 const barcoCanvas = document.getElementById('boat-canvas');
-barcoCanvas.addEventListener('click', function(event) {
+barcoCanvas.addEventListener('click', function (event) {
   moveCanvas(event);
 });
 
-createCanvas('barco-canvas', 600, 500, 400, canvasHeight, URLboatDeselected );
+createCanvas('barco-canvas', 600, 500, 400, canvasHeight, URLboatDeselected);
 
 let x = 10;
 let y = 500;
 
 for (let i = 0; i < numberParam; i++) {
-  console.log(" missionario iterou:"+ i);
+  console.log(" missionario iterou:" + i);
   const missionarioCanvas = createCanvas('missionario-canvas-' + i, x, y, canvasWidth, canvasHeight, URLmissionariesDeselected);
   /*missionarioCanvas.addEventListener('click', function(event) {
     moveCanvas(event);
@@ -132,7 +149,7 @@ x = 10;
 y -= canvasHeight + canvasSpacing;
 
 for (let i = 0; i < numberParam; i++) {
-  console.log("canibal iterou:"+ i);
+  console.log("canibal iterou:" + i);
   const canibalCanvas = createCanvas('canibal-canvas-' + i, x, y, canvasWidth, canvasHeight, URLcannibalsDeselected);
   /* canibalCanvas.addEventListener('click', function(event) {
     moveCanvas(event);

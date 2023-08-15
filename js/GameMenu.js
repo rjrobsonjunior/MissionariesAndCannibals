@@ -15,3 +15,5 @@ rulesButton.addEventListener('click', function () {
   // Redirecionar para a página de regras do jogo (GameRules.html)
   window.location.href = 'GameRules.html';
 });
+
+
