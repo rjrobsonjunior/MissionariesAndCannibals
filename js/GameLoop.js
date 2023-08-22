@@ -1,3 +1,7 @@
+//import { Entity } from "./Entity.js";
+//import { Boat } from "./Boat.js";
+//import { Managers} from "./Managers.js"
+
 // path to images
 const URLboatDeselected = '../assets/barco.png';
 const URLboatSelected = '../assets/barco2.png';
@@ -7,9 +11,9 @@ const URLcannibalsSelected = '../assets/canibal2.png';
 const URLcannibalsDeselected = '../assets/canibal1.png';
 
 //canvas parameters
-const canvasWidth = 120;
-const canvasHeight = 180;
-const canvasSpacing = 10;
+const canvasWidth = 7;
+const canvasHeight = 18;
+const canvasSpacing = 1;
 
 function getParameterBynumber(number) {
   const url = window.location.href;
@@ -79,11 +83,19 @@ function pauseGame() {
 function createCanvas(name, x, y, width, height, imagemURL) {
   const canvas = document.createElement('canvas');
   canvas.id = name;
-  canvas.width = width ;
-  canvas.height = height ;
+
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
+  const canvasWidth = (width / 100) * windowWidth;
+  const canvasHeight = (height / 100) * windowHeight;
+
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
   canvas.style.position = 'absolute';
-  canvas.style.left = x + 'px';
-  canvas.style.top = y + 'px';
+
+  // Definir posicionamento em porcentagem da tela
+  canvas.style.left = x + '%';
+  canvas.style.top = y + '%';
 
   const ctx = canvas.getContext('2d');
 
@@ -114,10 +126,10 @@ barcoCanvas.addEventListener('click', function(event) {
   moveCanvas(event);
 });
 
-createCanvas('barco-canvas', 600, 500, 400, canvasHeight, URLboatDeselected );
+createCanvas('barco-canvas', 40, 70, 30, canvasHeight, URLboatDeselected );
 
-let x = 10;
-let y = 500;
+let x = 1;
+let y = 70;
 
 for (let i = 0; i < numberParam; i++) {
   console.log(" missionario iterou:"+ i);
@@ -128,7 +140,7 @@ for (let i = 0; i < numberParam; i++) {
   x += canvasWidth + canvasSpacing;
 }
 
-x = 10;
+x = 1;
 y -= canvasHeight + canvasSpacing;
 
 for (let i = 0; i < numberParam; i++) {
