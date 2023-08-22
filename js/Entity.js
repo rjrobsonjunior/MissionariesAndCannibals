@@ -8,12 +8,32 @@ const ismoving = 3;
 
 export class Entity{
     constructor(posX, posY, missionarie) {
-        this.posX = posX;
-        this.posY = posY;
-        this.isMisssionarie = missionarie;
-        this.imagemURL = imagemURL;
-        this.imagem = new Image();
-        this.imagem.src = this.imagemURL;
+        const canvas = document.createElement('canvas');
+        canvas.id = name;
+
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const canvasWidth = (width / 100) * windowWidth;
+        const canvasHeight = (height / 100) * windowHeight;
+
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        canvas.style.position = 'absolute';
+
+        // Definir posicionamento em porcentagem da tela
+        canvas.style.left = x + '%';
+        canvas.style.top = y + '%';
+
+        const ctx = canvas.getContext('2d');
+
+        const imagem = new Image();
+        imagem.src = imagemURL;
+
+        imagem.onload = function() {
+            ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
+        };
+
+        document.body.appendChild(canvas);
         this.hover = false;
         this.state = LeftSide;
 
