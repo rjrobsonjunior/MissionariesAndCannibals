@@ -4,7 +4,7 @@ const LeftSide = 1;
 const RightSide = 2;
 const ismoving = 3;
 
-export class Boat {
+export default class Boat {
     constructor(){
         this.isHover = false;
         this.isSelected = false;

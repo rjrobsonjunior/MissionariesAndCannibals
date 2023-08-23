@@ -2,10 +2,11 @@ const LeftSide = 1;
 const RightSide = 2;
 const ismoving = 3;
 
-export class Manager {
+export default class Manager {
     constructor(numberEntitys) {
       this.Entitys = [];
       this.number = 2 * numberEntitys;
+      console.log(this.number);
     }
   
     pushEntity(Entity) {

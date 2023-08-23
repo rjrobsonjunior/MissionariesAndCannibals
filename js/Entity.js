@@ -6,34 +6,12 @@ const LeftSide = 1;
 const RightSide = 2;
 const ismoving = 3;
 
-export class Entity{
-    constructor(posX, posY, missionarie) {
-        const canvas = document.createElement('canvas');
-        canvas.id = name;
+export default class Entity{
 
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        const canvasWidth = (width / 100) * windowWidth;
-        const canvasHeight = (height / 100) * windowHeight;
+    constructor(name, width, height, posX, posY, missionarie) {
 
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
-        canvas.style.position = 'absolute';
-
-        // Definir posicionamento em porcentagem da tela
-        canvas.style.left = x + '%';
-        canvas.style.top = y + '%';
-
-        const ctx = canvas.getContext('2d');
-
-        const imagem = new Image();
-        imagem.src = imagemURL;
-
-        imagem.onload = function() {
-            ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
-        };
-
-        document.body.appendChild(canvas);
+        this.X = posX;
+        this.Y = posY;
         this.hover = false;
         this.state = LeftSide;
 

@@ -1,6 +1,6 @@
-//import { Entity } from "./Entity.js";
-//import { Boat } from "./Boat.js";
-//import { Managers} from "./Managers.js"
+import Entity from "./Entity.js";
+import Boat from "./Boat.js";
+import Manager from "./Manager.js"
 
 // path to images
 const URLboatDeselected = '../assets/barco.png';
@@ -34,51 +34,6 @@ let movesCount = 0;
 let startTime;
 let endTime;  
 
-// Função para exibir a tela de fim de jogo 
-function showEndScreen() {
-  // Parar o cronômetro (se estiver em execução)
-  endTime = new Date();
-  clearInterval(timerInterval);
-
-  // Atualizar as informações de movimentos e tempo
-  const movesSpan = document.querySelector('#moves-count span');
-  movesSpan.textContent = movesCount;
-
-  const timeSpan = document.querySelector('#time-spent span');
-  const timeDiff = Math.floor((endTime - startTime) / 1000); // Duração em segundos
-  const minutes = Math.floor(timeDiff / 60);
-  const seconds = timeDiff % 60;
-  timeSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-  // Exibir a tela de fim de jogo
-  const endScreen = document.querySelector('#end-screen');
-  endScreen.style.display = 'flex';
-}
-
-// Função para iniciar o jogo
-function startGame() {
-  // Iniciar o cronômetro
-  startTime = new Date();
-  timerInterval = setInterval(updateTimer, 1000);
-
-  // Lógica do jogo...
-
-  // Ao finalizar o jogo, chame a função showEndScreen()
-  showEndScreen();
-}
-
-// Função para atualizar o cronômetro (opcional)
-function updateTimer() {
-  // Lógica para atualizar o cronômetro exibido na tela
-}
-
-function pauseGame() {
-    if (!gameRunning) return;
-    // Pause the game logic
-    gameRunning = false;
-    // Implement pause functionality (e.g., freeze character movement)
-}
-
 
 function createCanvas(name, x, y, width, height, imagemURL) {
   const canvas = document.createElement('canvas');
@@ -110,21 +65,11 @@ function createCanvas(name, x, y, width, height, imagemURL) {
 }
 
 
-function moveCanvas(event) {
-  console.log("move 1");
-  const canvas = event.target;
-  const offsetX = event.clientX - canvas.offsetLeft;
-  const offsetY = event.clientY - canvas.offsetTop;
-  canvas.style.left = (event.clientX - offsetX) + 'px';
-  canvas.style.top = (event.clientY - offsetY) + 'px';
-  console.log("move 2");
-}
-
 //------------------ canvas creating -----------------------------------//
+
+const ManagerGame = new Manager(numberParam);
+
 const barcoCanvas = document.getElementById('boat-canvas');
-barcoCanvas.addEventListener('click', function(event) {
-  moveCanvas(event);
-});
 
 createCanvas('barco-canvas', 40, 70, 30, canvasHeight, URLboatDeselected );
 
@@ -152,3 +97,10 @@ for (let i = 0; i < numberParam; i++) {
   x += canvasWidth + canvasSpacing;
 
 }
+
+function gameLoop()
+{
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
