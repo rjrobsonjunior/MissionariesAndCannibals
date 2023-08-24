@@ -69,16 +69,15 @@ function createCanvas(name, x, y, width, height, imagemURL) {
 
 const ManagerGame = new Manager(numberParam);
 
-const barcoCanvas = document.getElementById('boat-canvas');
-
-createCanvas('barco-canvas', 40, 70, 30, canvasHeight, URLboatDeselected );
+const barcoCanvas = createCanvas('barco-canvas', 15, 80, 25, canvasHeight, URLboatDeselected );
 
 let x = 1;
-let y = 70;
+let y = 60;
 
 for (let i = 0; i < numberParam; i++) {
   console.log(" missionario iterou:"+ i);
   const missionarioCanvas = createCanvas('missionario-canvas-' + i, x, y, canvasWidth, canvasHeight, URLmissionariesDeselected);
+  //ManagerGame.pushEntity(missi)
   /*missionarioCanvas.addEventListener('click', function(event) {
     moveCanvas(event);
   });*/
