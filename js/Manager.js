@@ -95,9 +95,11 @@ export default class Manager
 
   loop()
   {
+    /** 
     for( Entity of this.Entitys)
     {
       Entity.loop();
     }
+    */
   }
 }

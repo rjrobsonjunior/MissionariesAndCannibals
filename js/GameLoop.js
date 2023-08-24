@@ -11,7 +11,7 @@ const URLcannibalsSelected = '../assets/canibal2.png';
 const URLcannibalsDeselected = '../assets/canibal1.png';
 
 //canvas parameters
-const canvasWidth = 7;    console.log(this.number);
+const canvasWidth = 7;
 
 const canvasHeight = 18;
 const canvasSpacing = 1;
@@ -103,6 +103,7 @@ for (let i = 0; i < numberParam; i++) {
 
 function gameLoop()
 {
+  //ManagerGame.loop();
   requestAnimationFrame(gameLoop);
 }
 
