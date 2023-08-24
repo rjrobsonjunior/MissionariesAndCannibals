@@ -11,7 +11,8 @@ const URLcannibalsSelected = '../assets/canibal2.png';
 const URLcannibalsDeselected = '../assets/canibal1.png';
 
 //canvas parameters
-const canvasWidth = 7;
+const canvasWidth = 7;    console.log(this.number);
+
 const canvasHeight = 18;
 const canvasSpacing = 1;
 
@@ -34,18 +35,26 @@ let movesCount = 0;
 let startTime;
 let endTime;  
 
+function widthCanvas(width)
+{
+  const windowWidth = window.innerWidth;
+  const canvasWidth = (width / 100) * windowWidth;
+  return canvasWidth;
+}
+
+function heightCanvas(height)
+{
+  const windowHeight = window.innerHeight;
+  const canvasHeight = (height / 100) * windowHeight;
+  return canvasHeight;
+}
 
 function createCanvas(name, x, y, width, height, imagemURL) {
   const canvas = document.createElement('canvas');
   canvas.id = name;
 
-  const windowWidth = window.innerWidth;
-  const windowHeight = window.innerHeight;
-  const canvasWidth = (width / 100) * windowWidth;
-  const canvasHeight = (height / 100) * windowHeight;
-
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeight;
+  canvas.width = widthCanvas(width);
+  canvas.height = heightCanvas(height);
   canvas.style.position = 'absolute';
 
   // Definir posicionamento em porcentagem da tela
@@ -72,30 +81,25 @@ const ManagerGame = new Manager(numberParam);
 const barcoCanvas = createCanvas('barco-canvas', 15, 80, 25, canvasHeight, URLboatDeselected );
 
 let x = 1;
-let y = 60;
+const yM = 60;
+const yC = yM - ( canvasHeight  + canvasSpacing);
+
 
 for (let i = 0; i < numberParam; i++) {
-  console.log(" missionario iterou:"+ i);
-  const missionarioCanvas = createCanvas('missionario-canvas-' + i, x, y, canvasWidth, canvasHeight, URLmissionariesDeselected);
-  //ManagerGame.pushEntity(missi)
-  /*missionarioCanvas.addEventListener('click', function(event) {
-    moveCanvas(event);
-  });*/
+
+  createCanvas ('missionario-canvas-' + i, x, yM, canvasWidth, canvasHeight, URLmissionariesDeselected);
+  createCanvas('canibal-canvas-' + i, x, yC, canvasWidth, canvasHeight, URLcannibalsDeselected);
+
+  let Emissionarie = new Entity('missionario-canvas-' + i, x, yM, widthCanvas(canvasWidth), heightCanvas(canvasHeight), true);
+  ManagerGame.pushEntity(Emissionarie);
+
+  let Ecannibal = new Entity('canibal-canvas-' + i, x, yC, widthCanvas(canvasWidth), heightCanvas(canvasHeight), false);
+  ManagerGame.pushEntity(Ecannibal);
+
   x += canvasWidth + canvasSpacing;
 }
 
-x = 1;
-y -= canvasHeight + canvasSpacing;
-
-for (let i = 0; i < numberParam; i++) {
-  console.log("canibal iterou:"+ i);
-  const canibalCanvas = createCanvas('canibal-canvas-' + i, x, y, canvasWidth, canvasHeight, URLcannibalsDeselected);
-  /* canibalCanvas.addEventListener('click', function(event) {
-    moveCanvas(event);
-  });*/
-  x += canvasWidth + canvasSpacing;
-
-}
+//console.log(ManagerGame);
 
 function gameLoop()
 {

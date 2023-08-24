@@ -1,3 +1,4 @@
+//import Entity from "./Entity";
 const LeftSide = 1;
 const RightSide = 2;
 const ismoving = 3;
@@ -8,12 +9,17 @@ export default class Manager
   {
     this.Entitys = [];
     this.number = 2 * numberEntitys;
-    console.log(this.number);
+    this.pBoat = null;
   }
 
   pushEntity(Entity) 
   {
     this.Entitys.push(Entity); 
+  }
+
+  pushBoat(Boat)
+  {
+    this.pBoat = Boat;
   }
 
   gameOver()
@@ -34,7 +40,7 @@ export default class Manager
     let cannibalRight = 0;
     const onBoat = 0;
 
-    for (const Entity of this.Entitys) 
+    for (let Entity of this.Entitys) 
     {
       console.log(`${Entity.constructor.isMissionarie} - Nome: ${Entity.nome}, Lado Rio: ${Entity.ladoRio}`);
       // is Missionarie
@@ -84,6 +90,14 @@ export default class Manager
     else if ((cannibalRight+missionarieRight) == this.number)
     {
       this.gameWin();
+    }
+  }
+
+  loop()
+  {
+    for( Entity of this.Entitys)
+    {
+      Entity.loop();
     }
   }
 }

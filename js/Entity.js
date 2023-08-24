@@ -84,6 +84,18 @@ export default class Entity
     return this.isMissionarie;
   }
 
+  move(bool)
+  {
+    //bool  === true ? left -> right : rigth -> left 
+    if(bool)
+    {
+
+    }
+    else
+    {
+
+    }
+  }
   loop()
   {
     this.mouseHover();
