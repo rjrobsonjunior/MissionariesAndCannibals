@@ -3,11 +3,15 @@ const LeftSide = 1;
 const RightSide = 2;
 const ismoving = 3;
 
+//import Entity from "./Entity";
+//import Boat from "./Boat";
+
 export default class Manager 
 {
   constructor(numberEntitys) 
   {
     this.Entitys = [];
+    
     this.number = 2 * numberEntitys;
     this.pBoat = null;
   }
@@ -42,7 +46,6 @@ export default class Manager
 
     for (let Entity of this.Entitys) 
     {
-      console.log(`${Entity.constructor.isMissionarie} - Nome: ${Entity.nome}, Lado Rio: ${Entity.ladoRio}`);
       // is Missionarie
       if(Entity.isMissionarie == true)
       {
@@ -92,14 +95,16 @@ export default class Manager
       this.gameWin();
     }
   }
-
+   
   loop()
   {
-    /** 
-    for( Entity of this.Entitys)
+    /*
+      for (let i = 0; i < this.Entitys.length; i++) 
     {
-      Entity.loop();
+      this.Entitys[i].loop();
     }
-    */
+    this.pBoat.loop();
+    this.checkStateEntitys();    
+  */
   }
 }

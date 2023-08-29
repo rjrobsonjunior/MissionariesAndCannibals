@@ -5,16 +5,17 @@ import Manager from "./Manager.js"
 // path to images
 const URLboatDeselected = '../assets/barco.png';
 const URLboatSelected = '../assets/barco2.png';
-const URLmissionariesSelected = '../assets/padre1.png';
+const URLmissionariesSelected = '../assets/padre2.png';
 const URLmissionariesDeselected = '../assets/padre1.png';
 const URLcannibalsSelected = '../assets/canibal2.png';
 const URLcannibalsDeselected = '../assets/canibal1.png';
 
 //canvas parameters
 const canvasWidth = 7;
-
 const canvasHeight = 18;
 const canvasSpacing = 1;
+const canvasWidthBoat = 25;
+
 
 function getParameterBynumber(number) {
   const url = window.location.href;
@@ -28,7 +29,7 @@ function getParameterBynumber(number) {
   
 // Obter o valor do parâmetro 'number' da URL
 const numberParam = getParameterBynumber('number');
-console.log(numberParam);
+//console.log(numberParam);
 
 // Variáveis para contagem de movimentos e tempo
 let movesCount = 0;
@@ -74,11 +75,13 @@ function createCanvas(name, x, y, width, height, imagemURL) {
 }
 
 
-//------------------ canvas creating -----------------------------------//
+//---------------------------- creating objects  ---------------------------------------------//
 
 const ManagerGame = new Manager(numberParam);
 
-const barcoCanvas = createCanvas('barco-canvas', 15, 80, 25, canvasHeight, URLboatDeselected );
+createCanvas('barco-canvas', 15, 80, canvasWidthBoat, canvasHeight, URLboatDeselected);
+const boat = new Boat('barco-canvas', 15, 80,  widthCanvas(canvasWidthBoat), heightCanvas(canvasHeight));
+ManagerGame.pushBoat(boat);
 
 let x = 1;
 const yM = 60;
@@ -90,10 +93,10 @@ for (let i = 0; i < numberParam; i++) {
   createCanvas ('missionario-canvas-' + i, x, yM, canvasWidth, canvasHeight, URLmissionariesDeselected);
   createCanvas('canibal-canvas-' + i, x, yC, canvasWidth, canvasHeight, URLcannibalsDeselected);
 
-  let Emissionarie = new Entity('missionario-canvas-' + i, x, yM, widthCanvas(canvasWidth), heightCanvas(canvasHeight), true);
+  let Emissionarie = new Entity('missionario-canvas-' + i, x, yM, widthCanvas(canvasWidth), heightCanvas(canvasHeight), true, URLmissionariesDeselected);
   ManagerGame.pushEntity(Emissionarie);
 
-  let Ecannibal = new Entity('canibal-canvas-' + i, x, yC, widthCanvas(canvasWidth), heightCanvas(canvasHeight), false);
+  let Ecannibal = new Entity('canibal-canvas-' + i, x, yC, widthCanvas(canvasWidth), heightCanvas(canvasHeight), false, URLcannibalsDeselected );
   ManagerGame.pushEntity(Ecannibal);
 
   x += canvasWidth + canvasSpacing;
@@ -103,8 +106,9 @@ for (let i = 0; i < numberParam; i++) {
 
 function gameLoop()
 {
-  //ManagerGame.loop();
+  ManagerGame.loop();
   requestAnimationFrame(gameLoop);
 }
 
+console.log(ManagerGame);
 gameLoop();
