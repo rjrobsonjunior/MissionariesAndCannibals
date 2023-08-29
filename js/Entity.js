@@ -27,6 +27,7 @@ export default class Entity
     this.canvas.addEventListener('mouseout', this.mouseOut.bind(this));
     this.canvas.addEventListener('click', this.handleClick.bind(this));
 
+    //this.drawImage();
   }
 
   drawImage() {
@@ -34,22 +35,23 @@ export default class Entity
     img.src = this.imageUrl;
     
     img.onload = () => {
-      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.context.drawImage(img, this.x, this.y, img.width, img.height);
+      this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
+      this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
     };
   }
 
   mouseOver() {
+
     const hoverImageUrl = this.isMissionarie === true 
     ? URLmissionariesSelected 
     : URLcannibalsSelected;
-
+    
     const img = new Image();
     img.src = hoverImageUrl;
     
     img.onload = () => {
-      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.context.drawImage(img, this.posX, this.posY, this.Ewidth, this.Ewidth);
+      this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
+      this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
     };
   }
 
