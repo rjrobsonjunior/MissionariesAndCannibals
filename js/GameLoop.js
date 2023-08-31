@@ -106,9 +106,9 @@ for (let i = 0; i < numberParam; i++) {
 
 function gameLoop()
 {
-  ManagerGame.loop();
+  //ManagerGame.loop();
   requestAnimationFrame(gameLoop);
 }
 
 console.log(ManagerGame);
-gameLoop();
+//gameLoop();

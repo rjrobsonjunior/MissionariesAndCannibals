@@ -5,6 +5,7 @@ const URLcannibalsDeselected = '../assets/canibal1.png';
 const LeftSide = 1;
 const RightSide = 2;
 const ismoving = 3;
+const drop = 50;
 
 export default class Entity
 {
@@ -14,7 +15,6 @@ export default class Entity
     this.X = posX;
     this.Y = posY;
     this.state = LeftSide;
-    this.mouseClick = false;
     this.imageUrl = URLimage;
 
     // canvas  property
@@ -50,6 +50,7 @@ export default class Entity
     img.src = hoverImageUrl;
     
     img.onload = () => {
+      console.log("imagem carregada");
       this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
       this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
     };
@@ -60,7 +61,8 @@ export default class Entity
   }
 
   handleClick() {
-    this.posXx += this.canvas.width * 0.5; // Mover para direita 50%
+    //alert("click");
+    this.X += drop; // Mover para direita 50%
     this.drawImage();
   }
 
@@ -83,8 +85,6 @@ export default class Entity
   }
   loop()
   {
-    this.mouseHover();
-    this.mouseClick();
-    this.draw();
+    
   }
 }
