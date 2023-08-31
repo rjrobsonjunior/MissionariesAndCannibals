@@ -26,7 +26,7 @@ function getParameterBynumber(number) {
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-  
+
 // Obter o valor do parâmetro 'number' da URL
 const numberParam = getParameterBynumber('number');
 //console.log(numberParam);
@@ -34,7 +34,7 @@ const numberParam = getParameterBynumber('number');
 // Variáveis para contagem de movimentos e tempo
 let movesCount = 0;
 let startTime;
-let endTime;  
+let endTime;
 
 function widthCanvas(width)
 {
@@ -67,7 +67,7 @@ function createCanvas(name, x, y, width, height, imagemURL) {
   const imagem = new Image();
   imagem.src = imagemURL;
 
-  imagem.onload = function() {
+  imagem.onload = function () {
     ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
   };
 
