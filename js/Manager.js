@@ -1,10 +1,6 @@
-//import Entity from "./Entity";
 const LeftSide = 1;
 const RightSide = 2;
-const ismoving = 3;
 
-//import Entity from "./Entity";
-//import Boat from "./Boat";
 
 export default class Manager 
 {
@@ -15,7 +11,7 @@ export default class Manager
     this.number = 2 * numberEntitys;
     this.pBoat = null;
   }
-
+    
   pushEntity(Entity) 
   {
     this.Entitys.push(Entity); 
@@ -42,7 +38,6 @@ export default class Manager
     let missionarieRight = 0;
     let cannibalLeft = 0;
     let cannibalRight = 0;
-    const onBoat = 0;
 
     for (let Entity of this.Entitys) 
     {
@@ -53,13 +48,9 @@ export default class Manager
         {
           missionarieLeft++;
         }
-        else if (Entity.state == RightSide)
-        {
-          missionarieRight ++;
-        }
         else
         {
-          onBoat ++;
+          missionarieRight ++;
         }
       }
       //is Cannibal
@@ -68,14 +59,10 @@ export default class Manager
         if(Entity.state == LeftSide)
         {
           cannibalLeft++;
-        }
-        else if (Entity.state == RightSide)
-        {
-          cannibalRight ++;
-        }
+        } 
         else
         {
-          onBoat ++;
+          cannibalRight ++;
         }
       }
     }
@@ -93,6 +80,10 @@ export default class Manager
     else if ((cannibalRight+missionarieRight) == this.number)
     {
       this.gameWin();
+    }
+    else
+    {
+      console.log("missionarie Left: " + missionarieLeft + " canibal left: " + cannibalLeft + " missionarie right: " + missionarieRight + " cannibal right: " + cannibalRight);
     }
   }
    

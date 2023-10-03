@@ -2,28 +2,37 @@ const URLboatDeselected = '../assets/barco.png';
 const URLboatSelected = '../assets/barco2.png';
 const LeftSide = 1;
 const RightSide = 2;
-const ismoving = 3;
+const canvasWidth = 7;
+const canvasHeight = 18;
+const canvasSpacing = 1;
+const canvasWidthBoat = 25;
+
+const drop = 50;
+
 
 export default class Boat 
 {
-    constructor(Ename, posX, posY, Bwidth, Bheight)
+    constructor(Ename, posX, posY, Bwidth, Bheight, URLimage, Manager)
     {
-        this.isHover = false;
-        this.isSelected = false;
-        this.Left = LeftSide;
-        this.onBoat = 0;
-        this.state = LeftSide;
-        this.x = posX;
-        this.y = posY;
+      this.pManager = Manager;
+      this.isHover = false;
+      this.isSelected = false;
+      this.state = LeftSide;
+      this.onBoat = 0;
+      this.state = LeftSide;
+      this.X = posX;
+      this.Y = posY;
+      this.imageUrl = URLimage;
 
-        this.entityList = [];
+      // canvas  property
+      this.heigth = Bheight;
+      this.width = Bwidth;
 
-        // canvas  property
-        this.heigth = Bheight;
-        this.width = Bwidth;
-        this.canvasElement = document.getElementById(Ename);
-        this.context = this.canvasElement.getContext('2d');
-
+      this.canvas = document.getElementById(Ename);
+      this.context = this.canvas.getContext('2d');
+      this.canvas.addEventListener('mouseover', this.mouseOver.bind(this));
+      this.canvas.addEventListener('mouseout', this.mouseOut.bind(this));
+      this.canvas.addEventListener('click', this.handleClick.bind(this));
     }
 
     draw(ctx) 
@@ -31,79 +40,64 @@ export default class Boat
       ctx.drawImage(this.imagem, this.posX, this.posY, this.Ewidth, this.Ewidth);
     }
   
-    mouseClick(event) 
-    {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
-  
-      if ( mouseX >= this.posX && mouseX <= this.posX + this.width && mouseY >= this.posY && mouseY <= this.posY + this.heigth) 
-      {
-        this.click = true;
-      }
-      else {
-        this.click = false;
-      }
-    }
-  
-    mouseHover(event) 
-    {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
+    drawImage() {
+      const img = new Image();
+      img.src = this.imageUrl;
       
-      if (  mouseX >= this.posX && mouseX <= this.posX + this.width && mouseY >= this.posY && mouseY <= this.posY + this.heigth) 
-      {
-        this.isMissionarie === true 
-        ? this.changeImage(URLboatSelected) 
-        :  this.changeImage(URLboatSelected);
-      } 
-      else 
-      {
-        this.isMissionarie === true 
-        ? this.changeImage(URLboatDeselected) 
-        : this.changeImage(URLboatDeselected);
-      }
+      img.onload = () => {
+        this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
+        this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
+      };
     }
   
+    mouseOver() 
+    {  
+      const img = new Image();
+      img.src = URLboatSelected;
+  
+      img.onload = () => {
+        this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
+        this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
+      };
+    }
+  
+    mouseOut() {
+      this.drawImage();
+    }
+  
+    handleClick() 
+    {
+      
+      if(this.state === LeftSide)
+      {
+        this.canvas.style.left = (this.X + drop) + '%'
+        this.X += drop;
+        this.state = RightSide;
+      }
+      else
+      {
+        this.canvas.style.left = (this.X - drop) + '%';
+        this.X -= drop;
+        this.state = LeftSide;
+      }
+      this.drawImage();
+
+      this.pManager.checkStateEntitys() ;
+    }
+
     clearCanvas()
     {
       this.context.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     }
   
-    changeImage(imageUrl) 
-    {
-      const image = new Image();
-      image.src = imageUrl;
-  
-      image.onload = () => {
-          this.clearCanvas();
-          this.context.drawImage(image, 0, 0);
-      };
-    }
-
-    setPlusBoat()
-    {
-        this.onBoat ++;
-    }
-
-    setLessBoat()
-    {
-        this.onBoat --;
-    }
-    
     getOnBoat()
     {
-        return this.onBoat;
+      return this.onBoat;
     }
 
-    move()
+    pushEntity(Entity) 
     {
-
-    }
-
-    loop()
-    {
-
+      Entity.move( (this.X + (this.onBoat * (canvasSpacing + canvasWidth)),( this.Y + canvasHeight - canvasSpacing))); 
+      this.onBoat++;
     }
 }

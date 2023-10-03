@@ -58,19 +58,19 @@ function createCanvas(name, x, y, width, height, imagemURL) {
   canvas.height = heightCanvas(height);
   canvas.style.position = 'absolute';
 
-  // Definir posicionamento em porcentagem da tela
+  // Define size in proporcion of screen
   canvas.style.left = x + '%';
   canvas.style.top = y + '%';
 
   const ctx = canvas.getContext('2d');
-
+  
   const imagem = new Image();
   imagem.src = imagemURL;
 
   imagem.onload = function () {
     ctx.drawImage(imagem, 0, 0, canvas.width, canvas.height);
   };
-
+  
   document.body.appendChild(canvas);
 }
 
@@ -79,12 +79,12 @@ function createCanvas(name, x, y, width, height, imagemURL) {
 
 const ManagerGame = new Manager(numberParam);
 
-createCanvas('barco-canvas', 15, 80, canvasWidthBoat, canvasHeight, URLboatDeselected);
-const boat = new Boat('barco-canvas', 15, 80,  widthCanvas(canvasWidthBoat), heightCanvas(canvasHeight));
+createCanvas('barco-canvas', 20, 80, canvasWidthBoat, canvasHeight, URLboatDeselected);
+const boat = new Boat('barco-canvas', 20, 80,  widthCanvas(canvasWidthBoat), heightCanvas(canvasHeight),  URLboatDeselected, ManagerGame);
 ManagerGame.pushBoat(boat);
 
 let x = 1;
-const yM = 60;
+const yM = 50;
 const yC = yM - ( canvasHeight  + canvasSpacing);
 
 
@@ -95,9 +95,11 @@ for (let i = 0; i < numberParam; i++) {
 
   let Emissionarie = new Entity('missionario-canvas-' + i, x, yM, widthCanvas(canvasWidth), heightCanvas(canvasHeight), true, URLmissionariesDeselected);
   ManagerGame.pushEntity(Emissionarie);
-
+  Emissionarie.pushBoat(boat);
+  
   let Ecannibal = new Entity('canibal-canvas-' + i, x, yC, widthCanvas(canvasWidth), heightCanvas(canvasHeight), false, URLcannibalsDeselected );
   ManagerGame.pushEntity(Ecannibal);
+  Ecannibal.pushBoat(boat);
 
   x += canvasWidth + canvasSpacing;
 }
