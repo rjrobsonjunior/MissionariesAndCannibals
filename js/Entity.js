@@ -1,8 +1,13 @@
-const URLmissionariesSelected = '../assets/padre2.png';
-const URLcannibalsSelected = '../assets/canibal2.png';
 const LeftSide = 1;
 const RightSide = 2;
 const drop = 60;
+const canvasWidth = 7;
+const canvasHeight = 18;
+const canvasSpacing = 1;
+const canvasWidthBoat = 25;
+const URLmissionariesSelected = '../assets/padre2.png';
+const URLcannibalsSelected = '../assets/canibal2.png';
+
 
 export default class Entity
 {
@@ -18,6 +23,7 @@ export default class Entity
 
     this.OriginalX = posX;
     this.OriginalY = posY;
+
     this.pBoat = null;
 
     // canvas  property
@@ -42,13 +48,15 @@ export default class Entity
     
     img.onload = () => {
       //console.log(this.imageUrl);
-      this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
-      this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
+      this.context.clearRect(0, 0, this.width, this.heigth);
+      this.context.drawImage(img, 0, 0, this.width, this.heigth);
     };
+    this.canvas.style.left = this.X + '%';
+    this.canvas.style.top = this.Y + '%';
   }
 
-  mouseOver() {
-
+  mouseOver()
+  {
     const hoverImageUrl = this.isMissionarie === true 
     ? URLmissionariesSelected 
     : URLcannibalsSelected;
@@ -58,9 +66,11 @@ export default class Entity
 
     img.onload = () => {
       //console.log(hoverImageUrl);
-      this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
-      this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
+      this.context.clearRect(0, 0, this.width, this.heigth);
+      this.context.drawImage(img,  0, 0, this.width, this.heigth);
     };
+    this.canvas.style.left = this.X + '%';
+    this.canvas.style.top = this.Y + '%';
   }
 
   mouseOut() {
@@ -68,8 +78,8 @@ export default class Entity
   }
 
   handleClick() {
+    
     // Entity is not on the Boat
-    console.log(this);
     if(this.onBoat === false)
     {
       if(this.state === LeftSide)
@@ -80,12 +90,25 @@ export default class Entity
         }
         else
         {
-          this.pBoat.pushEntity(this);
+          const inBoat = this.pBoat.getOnBoat();
+          if(inBoat < 2)
+          {
+            console.log ("x, y: ", this.X, this.Y);
+            this.X = this.pBoat.X + ( inBoat * (canvasSpacing + canvasWidth)) + canvasWidth;
+            this.Y = this.pBoat.Y -10;
+            console.log ("x, y: ", this.X, this.Y);
+            this.pBoat.pushEntity(this);
+            console.log(this.pBoat.getOnBoat());
+          }
+          else
+          {
+            alert("barco cheio!");
+          }
         }
       }
       else
       {
-        if(this.state === LeftSide)
+        if(this.state === RightSide)
         {
 
         }
@@ -96,12 +119,12 @@ export default class Entity
     {
       if(this.state == LeftSide)
       {
-        this.canvas.style.left = this.OriginalX + '%';
+        //this.canvas.style.left = this.OriginalX + '%';
         this.X += this.OriginalX;
       }
       else
       {
-        this.canvas.style.left = (this.OriginalX + drop)+ '%';
+        //
         this.X += this.OriginalX + drop;
       }
     }
@@ -121,8 +144,4 @@ export default class Entity
     this.Y = y;
     this.drawImage();
   }
-  loop()
-  {
-    
-  }
-}
+};

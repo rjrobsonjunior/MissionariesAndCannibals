@@ -1,7 +1,6 @@
-import Entity from "./Entity.js";
 import Boat from "./Boat.js";
 import Manager from "./Manager.js"
-
+import Entity from "./Entity.js";
 // path to images
 const URLboatDeselected = '../assets/barco.png';
 const URLboatSelected = '../assets/barco2.png';

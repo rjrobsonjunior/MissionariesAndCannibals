@@ -15,14 +15,14 @@ export default class Boat
     constructor(Ename, posX, posY, Bwidth, Bheight, URLimage, Manager)
     {
       this.pManager = Manager;
-      this.isHover = false;
-      this.isSelected = false;
       this.state = LeftSide;
       this.onBoat = 0;
       this.state = LeftSide;
       this.X = posX;
       this.Y = posY;
       this.imageUrl = URLimage;
+
+      this.EntityList = [];
 
       // canvas  property
       this.heigth = Bheight;
@@ -35,19 +35,16 @@ export default class Boat
       this.canvas.addEventListener('click', this.handleClick.bind(this));
     }
 
-    draw(ctx) 
-    {
-      ctx.drawImage(this.imagem, this.posX, this.posY, this.Ewidth, this.Ewidth);
-    }
-  
     drawImage() {
       const img = new Image();
       img.src = this.imageUrl;
       
       img.onload = () => {
-        this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
-        this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
+        this.context.clearRect(0, 0, this.width, this.heigth);
+        this.context.drawImage(img, 0, 0, this.width, this.heigth);
       };
+      this.canvas.style.left = this.X + '%';
+      this.canvas.style.top = this.Y + '%';
     }
   
     mouseOver() 
@@ -56,9 +53,11 @@ export default class Boat
       img.src = URLboatSelected;
   
       img.onload = () => {
-        this.context.clearRect(0, 0, this.Ewidth, this.Eheight);
-        this.context.drawImage(img, this.X, this.Y, this.Ewidth, this.Eheight);
+        this.context.clearRect(0, 0, this.width, this.heigth);
+        this.context.drawImage(img,  0, 0, this.width, this.heigth);
       };
+      this.canvas.style.left = this.X + '%';
+      this.canvas.style.top = this.Y + '%';
     }
   
     mouseOut() {
@@ -70,13 +69,12 @@ export default class Boat
       
       if(this.state === LeftSide)
       {
-        this.canvas.style.left = (this.X + drop) + '%'
         this.X += drop;
         this.state = RightSide;
       }
       else
       {
-        this.canvas.style.left = (this.X - drop) + '%';
+        //this.canvas.style.left = (this.X - drop) + '%';
         this.X -= drop;
         this.state = LeftSide;
       }
@@ -87,7 +85,7 @@ export default class Boat
 
     clearCanvas()
     {
-      this.context.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+      this.context.clearRect(0, 0, this.canvasElement.width, this.canvasElement.heigth);
     }
   
     getOnBoat()
@@ -95,9 +93,9 @@ export default class Boat
       return this.onBoat;
     }
 
-    pushEntity(Entity) 
+    pushEntity(entity) 
     {
-      Entity.move( (this.X + (this.onBoat * (canvasSpacing + canvasWidth)),( this.Y + canvasHeight - canvasSpacing))); 
+      this.EntityList.push(entity);
       this.onBoat++;
     }
 }
