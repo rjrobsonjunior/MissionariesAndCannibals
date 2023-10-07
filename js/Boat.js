@@ -83,7 +83,7 @@ export default class Boat
       {
         this.EntityList[i].move(this.state);
       }
-      
+
       this.pManager.checkStateEntitys() ;
     }
 
@@ -109,6 +109,7 @@ export default class Boat
       if(index != -1 )
       {
         this.EntityList.splice(index, 1);
+        this.onBoat--;
       }
     }
 };

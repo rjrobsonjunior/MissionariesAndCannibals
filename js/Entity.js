@@ -95,12 +95,12 @@ export default class Entity
           const inBoat = this.pBoat.getOnBoat();
           if(inBoat < 2)
           {
-            console.log ("x, y: ", this.X, this.Y);
             this.X = this.pBoat.X + ( inBoat * (canvasSpacing + canvasWidth)) + canvasWidth;
             this.Y = this.pBoat.Y -10;
-            console.log ("x, y: ", this.X, this.Y);
+
             this.pBoat.pushEntity(this);
-            console.log(this.pBoat.getOnBoat());
+
+            this.onBoat = true;
           }
           else
           {
@@ -110,24 +110,44 @@ export default class Entity
       }
       else
       {
-        if(this.state === RightSide)
+        if(this.pBoat.state === LeftSide)
         {
+          alert("Barco inascessível!");
+        }
+        else
+        {
+          const inBoat = this.pBoat.getOnBoat();
+          if(inBoat < 2)
+          {
+            this.X = this.pBoat.X + ( inBoat * (canvasSpacing + canvasWidth)) + canvasWidth;
+            this.Y = this.pBoat.Y -10;
 
+            this.pBoat.pushEntity(this);
+
+            this.onBoat = true;
+          }
+          else
+          {
+            alert("barco cheio!");
+          }
         }
       }
     }
     // Entity is on the Boat
     else
     {
+      this.pBoat.deleteEntity(this);
+      this.onBoat = false;
       if(this.state == LeftSide)
       {
         //this.canvas.style.left = this.OriginalX + '%';
-        this.X += this.OriginalX;
+        this.X = this.OriginalX;
+        this.Y = this.OriginalY;
       }
       else
       {
-        //
-        this.X += this.OriginalX + drop;
+        this.X + this.OriginalX + drop;
+        this.Y = this.OriginalY;
       }
     }
     
@@ -142,6 +162,7 @@ export default class Entity
 
   move(direction)
   {
+    this.state = direction;
     if(direction == LeftSide)
     {
       this.X -= drop;

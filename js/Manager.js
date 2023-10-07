@@ -81,10 +81,7 @@ export default class Manager
     {
       this.gameWin();
     }
-    else
-    {
-      console.log("missionarie Left: " + missionarieLeft + " canibal left: " + cannibalLeft + " missionarie right: " + missionarieRight + " cannibal right: " + cannibalRight);
-    }
+  
   }
    
 };
