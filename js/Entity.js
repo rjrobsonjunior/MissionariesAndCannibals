@@ -1,12 +1,14 @@
 const LeftSide = 1;
 const RightSide = 2;
-const drop = 60;
+
 const canvasWidth = 7;
 const canvasHeight = 18;
 const canvasSpacing = 1;
 const canvasWidthBoat = 25;
 const URLmissionariesSelected = '../assets/padre2.png';
 const URLcannibalsSelected = '../assets/canibal2.png';
+
+const drop = 50;
 
 
 export default class Entity
@@ -138,10 +140,16 @@ export default class Entity
     return this.isMissionarie;
   }
 
-  move(x, y)
+  move(direction)
   {
-    this.X = x;
-    this.Y = y;
-    this.drawImage();
+    if(direction == LeftSide)
+    {
+      this.X -= drop;
+    }
+    else
+    {
+      this.X += drop;
+    }
+    this.canvas.style.left = this.X + '%';
   }
 };

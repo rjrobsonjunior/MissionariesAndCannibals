@@ -74,12 +74,16 @@ export default class Boat
       }
       else
       {
-        //this.canvas.style.left = (this.X - drop) + '%';
         this.X -= drop;
         this.state = LeftSide;
       }
       this.drawImage();
 
+      for (let i = 0; i < this.EntityList.length; i++) 
+      {
+        this.EntityList[i].move(this.state);
+      }
+      
       this.pManager.checkStateEntitys() ;
     }
 
@@ -98,4 +102,13 @@ export default class Boat
       this.EntityList.push(entity);
       this.onBoat++;
     }
-}
+
+    deleteEntity(entity)
+    {
+      const index = this.EntityList.indexOf(entity);
+      if(index != -1 )
+      {
+        this.EntityList.splice(index, 1);
+      }
+    }
+};

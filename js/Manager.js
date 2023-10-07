@@ -87,15 +87,4 @@ export default class Manager
     }
   }
    
-  loop()
-  {
-    /*
-      for (let i = 0; i < this.Entitys.length; i++) 
-    {
-      this.Entitys[i].loop();
-    }
-    this.pBoat.loop();
-    this.checkStateEntitys();    
-  */
-  }
-}
+};
