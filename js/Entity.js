@@ -57,7 +57,8 @@ export default class Entity
     this.canvas.style.top = this.Y + '%';
   }
 
-  drawImage() {
+  drawImage()
+  {
     this.canvas.style.left = this.X + '%';
     this.canvas.style.top = this.Y + '%';
   }
@@ -158,13 +159,18 @@ export default class Entity
       }
     }
     
-    
     this.drawImage();
   }
 
   getIsMissionarie()
   {
     return this.isMissionarie;
+  }
+
+  setCordinate()
+  {
+    this.X = this.pBoat.X + canvasWidth;
+    this.drawImage();
   }
 
   move(direction)

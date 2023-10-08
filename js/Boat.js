@@ -123,5 +123,14 @@ export default class Boat
         this.EntityList.splice(index, 1);
         this.onBoat--;
       }
+      this.newPosition();
     }
+
+    newPosition()
+    {
+      for (let i = 0; i < this.EntityList.length; i++) 
+      {
+        this.EntityList[i].setCordinate();
+      }
+    }  
 };
