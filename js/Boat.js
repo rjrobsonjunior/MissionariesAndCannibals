@@ -71,25 +71,32 @@ export default class Boat
   
     handleClick() 
     {
-      
-      if(this.state === LeftSide)
+      if (this.onBoat >= 1)
       {
-        this.X += dropBoat;
-        this.state = RightSide;
+        if(this.state === LeftSide)
+        {
+          this.X += dropBoat;
+          this.state = RightSide;
+        }
+        else
+        {
+          this.X -= dropBoat;
+          this.state = LeftSide;
+        }
+        this.drawImage();
+        this.pManager.setMovies();
+        for (let i = 0; i < this.EntityList.length; i++) 
+        {
+          this.EntityList[i].move(this.state);
+        }
+
+        this.pManager.checkStateEntitys() ;
       }
       else
       {
-        this.X -= dropBoat;
-        this.state = LeftSide;
-      }
-      this.drawImage();
-
-      for (let i = 0; i < this.EntityList.length; i++) 
-      {
-        this.EntityList[i].move(this.state);
+        alert("barco vazio!");
       }
 
-      this.pManager.checkStateEntitys() ;
     }
 
     clearCanvas()

@@ -7,7 +7,7 @@ export default class Manager
   constructor(numberEntitys) 
   {
     this.Entitys = [];
-    
+    this.movies = 0;
     this.number = 2 * numberEntitys;
     this.pBoat = null;
   }
@@ -22,14 +22,18 @@ export default class Manager
     this.pBoat = Boat;
   }
 
+  setMovies()
+  {
+    this.movies++;
+  }
   gameOver()
   {
-
+    alert("VOCE PERDEU :< !!! Total de movimentos = " + this.movies);
   }
 
   gameWin()
   {
-
+    alert("VOCE GANHOU!!! :> Total de movimentos = " + this.movies);
   }
 
   checkStateEntitys() 
