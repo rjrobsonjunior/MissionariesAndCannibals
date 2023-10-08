@@ -7,7 +7,7 @@ const canvasHeight = 18;
 const canvasSpacing = 1;
 const canvasWidthBoat = 25;
 
-const drop = 50;
+const dropBoat = 50;
 
 
 export default class Boat 
@@ -36,6 +36,11 @@ export default class Boat
     }
 
     drawImage() {
+      this.canvas.style.left = this.X + '%';
+      this.canvas.style.top = this.Y + '%';
+    }
+
+    drawImageOver() {
       const img = new Image();
       img.src = this.imageUrl;
       
@@ -61,7 +66,7 @@ export default class Boat
     }
   
     mouseOut() {
-      this.drawImage();
+      this.drawImageOver();
     }
   
     handleClick() 
@@ -69,12 +74,12 @@ export default class Boat
       
       if(this.state === LeftSide)
       {
-        this.X += drop;
+        this.X += dropBoat;
         this.state = RightSide;
       }
       else
       {
-        this.X -= drop;
+        this.X -= dropBoat;
         this.state = LeftSide;
       }
       this.drawImage();

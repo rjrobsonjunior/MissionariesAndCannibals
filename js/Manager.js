@@ -67,12 +67,12 @@ export default class Manager
       }
     }
 
-    if( missionarieLeft < cannibalLeft)
+    if( missionarieLeft < cannibalLeft && missionarieLeft != 0 )
     {
       alert("Mais Canibais que Missionários no lado esquerdo;");
       this.gameOver();
     }
-    else if (missionarieRight < cannibalRight)
+    else if (missionarieRight < cannibalRight && missionarieRight != 0)
     {
       alert("Mais Canibais que Missionários no lado direito;");
       this.gameOver();

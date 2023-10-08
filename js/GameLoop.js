@@ -111,5 +111,5 @@ function gameLoop()
   requestAnimationFrame(gameLoop);
 }
 
-console.log(ManagerGame);
+//console.log(ManagerGame);
 //gameLoop();

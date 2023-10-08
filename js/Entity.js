@@ -8,8 +8,8 @@ const canvasWidthBoat = 25;
 const URLmissionariesSelected = '../assets/padre2.png';
 const URLcannibalsSelected = '../assets/canibal2.png';
 
-const drop = 50;
-
+const drop = 60;
+const dropBoat = 50;
 
 export default class Entity
 {
@@ -44,7 +44,7 @@ export default class Entity
     this.pBoat = Boat;
   }
 
-  drawImage() {
+  drawImageOut() {
     const img = new Image();
     img.src = this.imageUrl;
     
@@ -53,6 +53,11 @@ export default class Entity
       this.context.clearRect(0, 0, this.width, this.heigth);
       this.context.drawImage(img, 0, 0, this.width, this.heigth);
     };
+    this.canvas.style.left = this.X + '%';
+    this.canvas.style.top = this.Y + '%';
+  }
+
+  drawImage() {
     this.canvas.style.left = this.X + '%';
     this.canvas.style.top = this.Y + '%';
   }
@@ -76,7 +81,7 @@ export default class Entity
   }
 
   mouseOut() {
-    this.drawImage();
+    this.drawImageOut();
   }
 
   handleClick() {
@@ -84,6 +89,7 @@ export default class Entity
     // Entity is not on the Boat
     if(this.onBoat === false)
     {
+      //Entity left side
       if(this.state === LeftSide)
       {
         if(this.pBoat.state === RightSide)
@@ -108,6 +114,7 @@ export default class Entity
           }
         }
       }
+      //Entity Rigth side
       else
       {
         if(this.pBoat.state === LeftSide)
@@ -146,7 +153,7 @@ export default class Entity
       }
       else
       {
-        this.X + this.OriginalX + drop;
+        this.X = this.OriginalX + drop;
         this.Y = this.OriginalY;
       }
     }
@@ -165,11 +172,11 @@ export default class Entity
     this.state = direction;
     if(direction == LeftSide)
     {
-      this.X -= drop;
+      this.X -= dropBoat;
     }
     else
     {
-      this.X += drop;
+      this.X += dropBoat;
     }
     this.canvas.style.left = this.X + '%';
   }
