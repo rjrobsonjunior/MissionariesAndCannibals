@@ -84,7 +84,7 @@ export default class Boat
           this.state = LeftSide;
         }
         this.drawImage();
-        this.pManager.setMovies();
+        this.pManager.setmovements();
         for (let i = 0; i < this.EntityList.length; i++) 
         {
           this.EntityList[i].move(this.state);

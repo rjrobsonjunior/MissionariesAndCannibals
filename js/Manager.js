@@ -7,7 +7,7 @@ export default class Manager
   constructor(numberEntitys) 
   {
     this.Entitys = [];
-    this.movies = 0;
+    this.movements = 0;
     this.number = 2 * numberEntitys;
     this.pBoat = null;
     this.startTime = new Date(); 
@@ -23,26 +23,59 @@ export default class Manager
     this.pBoat = Boat;
   }
 
-  setMovies()
+  setmovements()
   {
-    this.movies++;
+    this.movements++;
     this.updateMovieCount();
   }
 
   updateMovieCount() 
   {
     const movieCountElement = document.getElementById('movieCount');
-    movieCountElement.textContent = this.movies;
+    movieCountElement.textContent = this.movements;
+  }
+
+  getElapsedTimeInSeconds() {
+    const currentTime = new Date();
+    const elapsedTime = (currentTime - this.startTime) / 1000; 
+    return elapsedTime.toFixed(1); 
   }
 
   gameOver()
   {
-    alert("VOCE PERDEU :< !!! Total de movimentos = " + this.movies);
+    this.setCookies();
+    window.location.href = 'GameOver.html';
   }
 
   gameWin()
   {
-    alert("VOCE GANHOU!!! :> Total de movimentos = " + this.movies);
+    this.setCookies();
+    window.location.href = 'GameWin.html';
+  }
+  setCookies()
+  {
+    const cookies = getCookies();
+    const movieCount = cookies.movieCount || 0; // Valor padrão de 0 se o cookie não existir
+    const currentTime = new Date(cookies.currentTime);
+
+    // Atualize os elementos HTML com os dados recuperados
+    const movieCountElement = this.movements;
+    const currentTimeElement =this.getElapsedTimeInSeconds ;
+
+    movieCountElement.textContent = movieCount;
+    currentTimeElement.textContent = currentTime.toISOString(); 
+  }
+  getCookies() 
+  {
+    const cookies = document.cookie.split(';');
+    const cookieData = {};
+  
+    cookies.forEach((cookie) => {
+      const [key, value] = cookie.trim().split('=');
+      cookieData[key] = decodeURIComponent(value);
+    });
+  
+    return cookieData;
   }
 
   checkStateEntitys() 
@@ -93,8 +126,6 @@ export default class Manager
     else if ((cannibalRight+missionarieRight) == this.number)
     {
       this.gameWin();
-    }
-  
+    } 
   }
-   
 };
