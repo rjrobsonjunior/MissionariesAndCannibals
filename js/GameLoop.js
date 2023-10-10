@@ -26,14 +26,23 @@ function getParameterBynumber(number) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+function updateTime() {
+  const timeElement = document.getElementById('time');
+  const currentTime = (new Date() - startTime) / 1000; // Tempo em segundos
+  timeElement.textContent = currentTime.toFixed(1) ;
+}
+
+// Inicialização
+const startTime = new Date(); 
+
+
+// Atualiza o tempo periodicamente
+setInterval(updateTime, 1000); // Atualiza a cada 100 milissegundos (0,1 segundos)
+
 // Obter o valor do parâmetro 'number' da URL
 const numberParam = getParameterBynumber('number');
 //console.log(numberParam);
 
-// Variáveis para contagem de movimentos e tempo
-let movesCount = 0;
-let startTime;
-let endTime;
 
 function widthCanvas(width)
 {
@@ -103,13 +112,3 @@ for (let i = 0; i < numberParam; i++) {
   x += canvasWidth + canvasSpacing;
 }
 
-//console.log(ManagerGame);
-
-function gameLoop()
-{
-  //ManagerGame.loop();
-  requestAnimationFrame(gameLoop);
-}
-
-//console.log(ManagerGame);
-//gameLoop();

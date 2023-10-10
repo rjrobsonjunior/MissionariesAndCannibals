@@ -25,7 +25,15 @@ export default class Manager
   setMovies()
   {
     this.movies++;
+    this.updateMovieCount();
   }
+
+  updateMovieCount() 
+  {
+    const movieCountElement = document.getElementById('movieCount');
+    movieCountElement.textContent = this.movies;
+  }
+
   gameOver()
   {
     alert("VOCE PERDEU :< !!! Total de movimentos = " + this.movies);
