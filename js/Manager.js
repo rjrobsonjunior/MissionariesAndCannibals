@@ -43,24 +43,24 @@ export default class Manager
 
   gameOver()
   {
-    this.setCookies();
+    //this.setCookies();
     window.location.href = 'GameOver.html';
   }
 
   gameWin()
   {
-    this.setCookies();
+    //this.setCookies();
     window.location.href = 'GameWin.html';
   }
+
   setCookies()
   {
-    const cookies = getCookies();
-    const movieCount = cookies.movieCount || 0; // Valor padrão de 0 se o cookie não existir
-    const currentTime = new Date(cookies.currentTime);
+    const cookies = this.getCookies();
+    const movieCount = cookies.movieCount || 0;
 
     // Atualize os elementos HTML com os dados recuperados
     const movieCountElement = this.movements;
-    const currentTimeElement =this.getElapsedTimeInSeconds ;
+    const currentTimeElement =this.getElapsedTimeInSeconds() ;
 
     movieCountElement.textContent = movieCount;
     currentTimeElement.textContent = currentTime.toISOString(); 
