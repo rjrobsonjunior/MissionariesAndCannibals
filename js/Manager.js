@@ -10,8 +10,9 @@ export default class Manager
     this.movies = 0;
     this.number = 2 * numberEntitys;
     this.pBoat = null;
+    this.startTime = new Date(); 
   }
-    
+  
   pushEntity(Entity) 
   {
     this.Entitys.push(Entity); 

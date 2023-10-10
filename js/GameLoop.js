@@ -15,6 +15,11 @@ const canvasHeight = 18;
 const canvasSpacing = 1;
 const canvasWidthBoat = 25;
 
+const returnButton = document.querySelector('#return');
+returnButton.addEventListener('click', function () {
+  // Redirecionar para a página de regras do jogo (GameRules.html)
+  window.location.href = 'GameMenu.html';
+});
 
 function getParameterBynumber(number) {
   const url = window.location.href;
@@ -35,13 +40,11 @@ function updateTime() {
 // Inicialização
 const startTime = new Date(); 
 
-
 // Atualiza o tempo periodicamente
 setInterval(updateTime, 1000); // Atualiza a cada 100 milissegundos (0,1 segundos)
 
 // Obter o valor do parâmetro 'number' da URL
 const numberParam = getParameterBynumber('number');
-//console.log(numberParam);
 
 
 function widthCanvas(width)
